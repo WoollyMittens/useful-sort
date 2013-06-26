@@ -1,6 +1,6 @@
 # useful.sort.js: Table Sorting
 
-The contents of the table can be sorted by clicking on the headers.
+Sorting the contents of a table by clicking on the headers.
 
 ## How to use the script
 
