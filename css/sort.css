@@ -1,0 +1,45 @@
+/*
+	Reference Styling for Table Sorting and Filtering
+*/
+@media all {
+  /*
+  	filter / sort
+  */
+  table.sort {
+    width: 100%;
+  }
+  table.sort thead tr {
+    vertical-align: top;
+  }
+  table.sort thead tr th {
+    border-bottom: solid 1px #333333;
+    font-weight: bold;
+    padding: 5px 10px;
+    text-align: left;
+  }
+  table.sort thead tr th a {
+    background: Transparent url(../img/sort.png) 100% 4px;
+    color: #000;
+    display: block;
+    padding-right: 20px;
+    text-decoration: none;
+  }
+  table.sort thead tr th a:hover {
+    text-decoration: underline;
+  }
+  table.sort thead tr th a.sort-down {
+    background-position: 100% -28px;
+  }
+  table.sort thead tr th a.sort-up {
+    background-position: 100% -60px;
+  }
+  table.sort tbody tr td {
+    padding: 5px 10px;
+    text-align: left;
+  }
+  table.sort tbody tr td img {
+    border: solid 1px #333333;
+    height: auto;
+    width: 32px;
+  }
+}
