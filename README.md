@@ -2,6 +2,8 @@
 
 Sorting the contents of a table by clicking on the headers.
 
+Try the <a href="http://www.woollymittens.nl/useful/default.php?url=sort">sort demo</a>.
+
 ## How to use the script
 
 The stylesheet is best included in the header of the document.
@@ -39,9 +41,13 @@ useful.sort.start(parent, {
 ```
 
 **id : {string}** - The ID attribute of an element somewhere in the document.
+
 **parent : {DOM node}** - The DOM element around which the functionality is centred.
+
 **links : {string}** - A CSS rule that describes the clickable headers within *parent*.
+
 **rows : {string}** - A CSS rule that describes the rows within *parent*.
+
 **cols : {string}** - A CSS rule that describes the data cells within *rows*.
 
 ### Using document.querySelectorAll
@@ -61,7 +67,9 @@ useful.css.select({
 ```
 
 **rule : {string}** - The CSS Rule for the intended target(s) of the script.
+
 **handler : {function}** - The public function that starts the script.
+
 **data : {object}** - Name-value pairs with configuration data.
 
 ### Using jQuery
