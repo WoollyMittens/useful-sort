@@ -1,16 +1,12 @@
 /*
 	Reference Styling for Table Sorting and Filtering
 */
-
 @media all {
-
 	@import "compass/css3";
 	@import "compass/utilities";
-
 	/*
 		filter / sort
 	*/
-
 	table.sort {
 		width : 100%;
 		thead {
@@ -54,7 +50,6 @@
 			}
 		}
 	}
-
 }
 @media (min-width: 1200px) {}
 @media (min-width: 980px) and (max-width: 1199px) {}
