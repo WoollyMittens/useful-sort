@@ -29,7 +29,7 @@
 
 				<!-- Cut below this -->
 				<style>@import url("./css/sort.css")</style>
-				<table class="sort">
+				<table class="sort" id="exampleSort">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -112,18 +112,15 @@
 						</tr>
 					</tbody>
 				</table>
-				<script src="./js/useful.sort.js"></script>
+				<script src="./js/sort.min.js"></script>
 				<script>
 				//<!--
-					useful.css.select({
-						rule : '.sort',
-						handler : useful.sort.start,
-						data : {
-							'headers' : 'thead tr th',
-							'rows' : 'tbody tr',
-							'cols' : 'th, td'
-						}
+					var sort = new useful.Sort( document.getElementById('exampleSort'), {
+						'headers' : 'thead tr th',
+						'rows' : 'tbody tr',
+						'cols' : 'th, td'
 					});
+					sort.start();
 				//-->
 				</script>
 				<!-- Cut above this -->
