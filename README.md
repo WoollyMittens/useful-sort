@@ -2,7 +2,7 @@
 
 Sorting the contents of a table by clicking on the headers.
 
-Try the <a href="http://www.woollymittens.nl/useful/default.php?url=sort">demo</a>.
+Try the <a href="http://www.woollymittens.nl/useful/default.php?url=useful-sort">demo</a>.
 
 ## How to include the script
 
