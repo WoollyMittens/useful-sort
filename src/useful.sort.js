@@ -37,7 +37,7 @@
 			}
 		};
 		this.update = function (context) {
-			var a, b, selection, type, tbody, rows = [];
+			var a, b, selection, index, type, tbody, rows = [];
 			// update the headers
 			for (a = 0 , b = context.cfg.links.length; a < b; a += 1) {
 				if (context.cfg.active === a) {
@@ -54,7 +54,8 @@
 				rows[a] = selection[a];
 			}
 			// determine the data type
-			type = context.guessType(useful.transitions.select(context.cfg.cols, rows[0])[context.cfg.active]);
+			index = parseInt(rows.length/2);
+			type = context.guessType(useful.transitions.select(context.cfg.cols, rows[index])[context.cfg.active]);
 			// sort the array by the relevant column
 			rows.sort(function (a, b) {
 				return context.sortType(a, b, type, context);
@@ -69,15 +70,15 @@
 			}
 		};
 		this.guessType = function (element) {
-			var type;
+			var type, contents = element.innerHTML.replace(/(<([^>]+)>)/ig, '');
 			// if the content is an HTML5 time element
 			if (element.getElementsByTagName('time').length > 0 && element.getElementsByTagName('time')[0].getAttribute('datetime')) {
 				type = 'html5time';
 			// else if the content are a date
-			} else if (!isNaN(new Date(element.innerHTML.replace(/(<([^>]+)>)/ig, '')))) {
+			} else if (!isNaN(new Date(contents))) {
 				type = 'stringdate';
 			// else if the contents are a number
-			} else if (!isNaN(parseFloat(element.innerHTML.replace(/(<([^>]+)>)/ig, '')))) {
+			} else if (!isNaN(parseFloat(contents))) {
 				type = 'number';
 			// else if the contents are an image
 			} else if (element.getElementsByTagName('img').length > 0 && element.getElementsByTagName('img')[0].alt) {
@@ -85,7 +86,7 @@
 			} else if (element.getElementsByTagName('img').length > 0 && element.getElementsByTagName('img')[0].title) {
 				type = 'title';
 			// else if the contents are a currency
-			} else if (element.innerHTML.replace(/(<([^>]+)>)/ig, '').match(/^\$?(\d{1,3}[ ,]?)*(\.\d{0,2})?$/gi)) {
+			} else if (contents !== '' && contents.match(/^\$?(\d{1,3}[ ,]?)*(\.\d{0,2})?$/gi)) {
 				type = 'currency';
 			// else assume it's a string
 			} else {
