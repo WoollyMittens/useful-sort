@@ -35,6 +35,8 @@
 				context.cfg.headers[a].appendChild(context.cfg.links[a]);
 				context.cfg.links[a].onclick = context.onClicked(context.cfg.links[a], context);
 			}
+			// disable the start function so it can't be started twice
+			this.start = function () {};
 		};
 		this.update = function (context) {
 			var a, b, selection, index, type, tbody, rows = [];
@@ -154,6 +156,8 @@
 			// perform the sort
 			context.update(context);
 		};
+		// go
+		this.start();
 	};
 
 }(window.useful = window.useful || {}));
