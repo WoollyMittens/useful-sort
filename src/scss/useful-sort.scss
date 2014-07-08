@@ -1,55 +1,47 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "mixins";
 /*
-	Reference Styling for Table Sorting and Filtering
+	filter / sort
 */
-
-@media all {
-	@import "compass/css3";
-	@import "compass/utilities";
-	@import "definitions";
-	@import "typography";
-
-	/*
-		filter / sort
-	*/
-
-	table.sort {
-		width : 100%;
-		thead {
-			tr {
-				vertical-align : top;
-				th {
-					a {
-						background : Transparent url(../img/sort.png) 100% 4px;
-						display : block;
-						padding-right : 20px;
-						&.sort-down {
-							background-position : 100% -28px;
-						}
-						&.sort-up {
-							background-position : 100% -60px;
-						}
+table.sort {
+	width : 100%;
+	thead {
+		tr {
+			vertical-align : top;
+			th {
+				background-color : $color-hover;
+				padding : 0.5em 1em;
+				text-align : left;
+				a {
+					background : Transparent url(../img/sort.png) 100% 4px;
+					color : #fff;
+					font-weight : normal;
+					text-decoration : none;
+					display : block;
+					padding-right : 20px;
+					&.sort-down {
+						background-position : 100% -28px;
 					}
-				}
-			}
-		}
-		tbody {
-			tr {
-				td {
-					vertical-align : middle;
-					img {
-						border : solid 1px #333;
-						height : auto;
-						width : 32px;
+					&.sort-up {
+						background-position : 100% -60px;
 					}
 				}
 			}
 		}
 	}
-
+	tbody {
+		tr {
+			td {
+				padding : 0.25em 1em;
+				vertical-align : middle;
+				img {
+					border : solid 1px #333;
+					display : block;
+					height : auto;
+					width : 32px;
+				}
+			}
+		}
+	}
 }
-@media (min-width: 1200px) {}
-@media (min-width: 980px) and (max-width: 1199px) {}
-@media (min-width: 768px) and (max-width: 979px) {}
-@media (max-width: 767px) {}
-@media (max-width: 480px) {}
-@media print {}
