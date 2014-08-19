@@ -39,7 +39,7 @@
 			this.start = function () {};
 		};
 		this.update = function (context) {
-			var a, b, selection, index, type, tbody, rows = [];
+			var a, b, selection, index, type, tbody, fragment, rows = [];
 			// update the headers
 			for (a = 0 , b = context.cfg.links.length; a < b; a += 1) {
 				if (context.cfg.active === a) {
@@ -63,13 +63,14 @@
 				return context.sortType(a, b, type, context);
 			});
 			// for all rows in the array
+			fragment = document.createDocumentFragment();
+			tbody = rows[0].parentNode;
 			for (a = 0 , b = rows.length; a < b; a += 1) {
-				// remove the row from the table
-				tbody = rows[a].parentNode;
-				rows[a] = tbody.removeChild(rows[a]);
-				// add the row back at the bottom of the table
-				tbody.appendChild(rows[a]);
+				// remove the row and store it in the fragment
+				fragment.appendChild(tbody.removeChild(rows[a]));
 			}
+			// put the fragment back
+			tbody.appendChild(fragment);
 		};
 		this.guessType = function (element) {
 			var type, contents = element.innerHTML.replace(/(<([^>]+)>)/ig, '');
