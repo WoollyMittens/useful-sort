@@ -29,7 +29,8 @@ To enable the use of HTML5 tags in Internet Explorer 8 and lower, include *html5
 ## How to start the script
 
 ```javascript
-var sort = new useful.Sort( document.getElementById('id'), {
+var sort = new useful.Sort().init({
+	'element' : document.getElementById('id'),
 	'headers' : 'thead tr th',
 	'rows' : 'tbody tr',
 	'cols' : 'th, td'
@@ -46,7 +47,7 @@ var sort = new useful.Sort( document.getElementById('id'), {
 
 ## How to control the script
 
-### Focus
+### Perform
 
 ```javascript
 sort.perform(index, direction);

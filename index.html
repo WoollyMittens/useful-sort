@@ -115,7 +115,8 @@
 				<script src="./inc/js/useful-sort.js"></script>
 				<script>
 				//<!--
-					var sort = new useful.Sort( document.getElementById('exampleSort'), {
+					var sort = new useful.Sort().init({
+						'element' : document.getElementById('exampleSort'),
 						'headers' : 'thead tr th',
 						'rows' : 'tbody tr',
 						'cols' : 'th, td'
