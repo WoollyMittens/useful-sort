@@ -458,55 +458,60 @@ var useful = useful || {};
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-// create the constructor if needed
+// create the global element if needed
 var useful = useful || {};
-useful.Sort = useful.Sort || function () {};
 
-// extend the constructor
-useful.Sort.prototype.init = function (cfg) {
-	// properties
+// extend the global element
+useful.Sort = function () {
+
+	// PROPERTIES
+
 	"use strict";
-	this.cfg = cfg;
-	this.obj = cfg.element;
-	// methods
-	this.start = function () {
+
+	// METHODS
+
+	this.init = function (config) {
 		var a, b;
+		// store the configuration
+		this.config = config;
+		this.element = config.element;
 		// get the headers
-		this.cfg.headers = useful.transitions.select(this.cfg.headers, this.obj);
-		this.cfg.links = [];
+		this.config.headers = useful.transitions.select(this.config.headers, this.element);
+		this.config.links = [];
 		// add links to all the headers
-		for (a = 0 , b = this.cfg.headers.length; a < b; a += 1) {
-			this.cfg.links[a] = document.createElement('a');
-			this.cfg.links[a].href = '#';
-			this.cfg.links[a].className = 'sort-none';
-			this.cfg.links[a].innerHTML = this.cfg.headers[a].innerHTML;
-			this.cfg.headers[a].innerHTML = '';
-			this.cfg.headers[a].appendChild(this.cfg.links[a]);
-			this.cfg.links[a].onclick = this.onClicked(this.cfg.links[a]);
+		for (a = 0 , b = this.config.headers.length; a < b; a += 1) {
+			this.config.links[a] = document.createElement('a');
+			this.config.links[a].href = '#';
+			this.config.links[a].className = 'sort-none';
+			this.config.links[a].innerHTML = this.config.headers[a].innerHTML;
+			this.config.headers[a].innerHTML = '';
+			this.config.headers[a].appendChild(this.config.links[a]);
+			this.config.links[a].onclick = this.onClicked(this.config.links[a]);
 		}
-		// disable the start function so it can't be started twice
-		this.init = function () {};
+		// return the object
+		return this;
 	};
+
 	this.update = function (context) {
 		var a, b, selection, index, type, tbody, fragment, rows = [];
 		// update the headers
-		for (a = 0 , b = this.cfg.links.length; a < b; a += 1) {
-			if (this.cfg.active === a) {
-				this.cfg.links[a].className = (this.cfg.direction > 0) ?
-					this.cfg.links[a].className.replace(/sort-up|sort-none/gi, 'sort-down'):
-					this.cfg.links[a].className.replace(/sort-down|sort-none/gi, 'sort-up');
+		for (a = 0 , b = this.config.links.length; a < b; a += 1) {
+			if (this.config.active === a) {
+				this.config.links[a].className = (this.config.direction > 0) ?
+					this.config.links[a].className.replace(/sort-up|sort-none/gi, 'sort-down'):
+					this.config.links[a].className.replace(/sort-down|sort-none/gi, 'sort-up');
 			} else {
-				this.cfg.links[a].className = this.cfg.links[a].className.replace(/sort-up|sort-down/gi, 'sort-none');
+				this.config.links[a].className = this.config.links[a].className.replace(/sort-up|sort-down/gi, 'sort-none');
 			}
 		}
 		// create a sortable array for the rows
-		selection = useful.transitions.select(this.cfg.rows, this.obj);
+		selection = useful.transitions.select(this.config.rows, this.element);
 		for (a = 0 , b = selection.length; a < b; a += 1) {
 			rows[a] = selection[a];
 		}
 		// determine the data type
 		index = parseInt(rows.length/2);
-		type = this.guessType(useful.transitions.select(this.cfg.cols, rows[index])[this.cfg.active]);
+		type = this.guessType(useful.transitions.select(this.config.cols, rows[index])[this.config.active]);
 		// sort the array by the relevant column
 		var _this = this;
 		rows.sort(function (a, b) {
@@ -522,6 +527,7 @@ useful.Sort.prototype.init = function (cfg) {
 		// put the fragment back
 		tbody.appendChild(fragment);
 	};
+
 	this.guessType = function (element) {
 		var type, contents = element.innerHTML.replace(/(<([^>]+)>)/ig, '');
 		// if the content is an HTML5 time element
@@ -548,11 +554,12 @@ useful.Sort.prototype.init = function (cfg) {
 		// return the guess
 		return type;
 	};
+
 	this.sortType = function (a, b, type) {
 		var cola, colb, vala, valb;
 		// get the two columns
-		cola = useful.transitions.select(this.cfg.cols, a)[this.cfg.active];
-		colb = useful.transitions.select(this.cfg.cols, b)[this.cfg.active];
+		cola = useful.transitions.select(this.config.cols, a)[this.config.active];
+		colb = useful.transitions.select(this.config.cols, b)[this.config.active];
 		// if the content are an HTML5 date
 		switch (type) {
 		case 'html5time' :
@@ -584,32 +591,34 @@ useful.Sort.prototype.init = function (cfg) {
 			valb = colb.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase();
 		}
 		// compare the contents
-		return (this.cfg.direction > 0) ? vala > valb : vala < valb;
+		return (this.config.direction > 0) ? vala > valb : vala < valb;
 	};
+
+	this.perform = function (index, direction) {
+		// store the target column
+		this.config.active = index;
+		// store the search direction
+		this.config.direction = direction;
+		// perform the sort
+		this.update();
+	};
+
+	// EVENTS
+
 	this.onClicked = function (element) {
 		var _this = this;
 		return function () {
 			// get the index of the column
-			var index = _this.cfg.links.indexOf(element);
+			var index = _this.config.links.indexOf(element);
 			// toggle the search direction
-			var direction = (_this.cfg.links[index].className.match(/sort-up|sort-none/gi)) ? 1 : -1;
+			var direction = (_this.config.links[index].className.match(/sort-up|sort-none/gi)) ? 1 : -1;
 			// perform the sort
 			_this.perform(index, direction);
 			// cancel the click
 			return false;
 		};
 	};
-	this.perform = function (index, direction) {
-		// store the target column
-		this.cfg.active = index;
-		// store the search direction
-		this.cfg.direction = direction;
-		// perform the sort
-		this.update();
-	};
-	// go
-	this.start();
-	return this;
+
 };
 
 // return as a require.js module
