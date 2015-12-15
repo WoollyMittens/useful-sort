@@ -1,0 +1,57 @@
+/*
+Constants
+*/
+/*
+Hides text in the margin
+*/
+/*
+Turns a button into an icon
+*/
+/*
+Centres a graphic or glyph inside an icon
+*/
+/*
+Offers both the pixel and rem value of a single property
+*/
+/*
+Offers both the pixel and rem values of a shorthand property
+*/
+/*
+Offers the text size as both the pixel and rem value
+*/
+/*
+Adds vendor prefixed to a property
+*/
+/*
+Applies the "clearfix" hack to a container with floating content
+*/
+/*
+	filter / sort
+*/
+table.sort {
+  width: 100%; }
+  table.sort thead tr {
+    vertical-align: top; }
+    table.sort thead tr th {
+      background-color: #ff9800;
+      padding: 0.5em 1em;
+      text-align: left; }
+      table.sort thead tr th a {
+        background: Transparent url(../img/sort.png) 100% 4px;
+        color: #fff;
+        font-weight: normal;
+        text-decoration: none;
+        display: block;
+        padding-right: 20px; }
+        table.sort thead tr th a.sort-down {
+          background-position: 100% -28px; }
+        table.sort thead tr th a.sort-up {
+          background-position: 100% -60px; }
+  table.sort tbody tr td {
+    padding: 0.25em 1em;
+    vertical-align: middle; }
+    table.sort tbody tr td img {
+      border: solid 1px #333;
+      display: block;
+      height: auto;
+      width: 32px; }
