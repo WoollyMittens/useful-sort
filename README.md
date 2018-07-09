@@ -1,4 +1,4 @@
-# useful.sort.js: Table Sorting
+# sort.js: Table Sorting
 
 Sorting the contents of a table by clicking on the headers.
 
@@ -9,27 +9,19 @@ Try the <a href="http://www.woollymittens.nl/default.php?url=useful-sort">demo</
 The stylesheet is best included in the header of the document.
 
 ```html
-<link rel="stylesheet" href="./css/useful-sort.css"/>
+<link rel="stylesheet" href="./css/sort.css"/>
 ```
 
 This include can be added to the header or placed inline before the script is invoked.
 
 ```html
-<script src="./js/useful-sort.js"></script>
-```
-
-To enable the use of HTML5 tags in Internet Explorer 8 and lower, include *html5.js*.
-
-```html
-<!--[if lte IE 9]>
-	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
+<script src="./js/sort.js"></script>
 ```
 
 ## How to start the script
 
 ```javascript
-var sort = new useful.Sort().init({
+var sort = new Sort({
 	'element' : document.getElementById('id'),
 	'headers' : 'thead tr th',
 	'rows' : 'tbody tr',

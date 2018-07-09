@@ -1,20 +1,15 @@
 /*
 	Source:
-	van Creij, Maurice (2014). "useful.sort.js: Simple table sorting functionality", version 20141127, http://www.woollymittens.nl/.
+	van Creij, Maurice (2018). "sort.js: Simple table sorting functionality", http://www.woollymittens.nl/.
 
 	License:
 	This work is licensed under a Creative Commons Attribution 3.0 Unported License.
 */
 
-// create the global element if needed
-var useful = useful || {};
-
-// extend the global element
-useful.Sort = function () {
+// establish the class
+var Sort = function (config) {
 
 	// PROPERTIES
-
-	"use strict";
 
 	// METHODS
 
@@ -24,7 +19,7 @@ useful.Sort = function () {
 		this.config = config;
 		this.element = config.element;
 		// get the headers
-		this.config.headers = useful.transitions.select(this.config.headers, this.element);
+		this.config.headers = transitions.select(this.config.headers, this.element);
 		this.config.links = [];
 		// add links to all the headers
 		for (a = 0 , b = this.config.headers.length; a < b; a += 1) {
@@ -53,13 +48,13 @@ useful.Sort = function () {
 			}
 		}
 		// create a sortable array for the rows
-		selection = useful.transitions.select(this.config.rows, this.element);
+		selection = transitions.select(this.config.rows, this.element);
 		for (a = 0 , b = selection.length; a < b; a += 1) {
 			rows[a] = selection[a];
 		}
 		// determine the data type
 		index = parseInt(rows.length/2);
-		type = this.guessType(useful.transitions.select(this.config.cols, rows[index])[this.config.active]);
+		type = this.guessType(transitions.select(this.config.cols, rows[index])[this.config.active]);
 		// sort the array by the relevant column
 		var _this = this;
 		rows.sort(function (a, b) {
@@ -106,8 +101,8 @@ useful.Sort = function () {
 	this.sortType = function (a, b, type) {
 		var cola, colb, vala, valb;
 		// get the two columns
-		cola = useful.transitions.select(this.config.cols, a)[this.config.active];
-		colb = useful.transitions.select(this.config.cols, b)[this.config.active];
+		cola = transitions.select(this.config.cols, a)[this.config.active];
+		colb = transitions.select(this.config.cols, b)[this.config.active];
 		// if the content are an HTML5 date
 		switch (type) {
 		case 'html5time' :
@@ -167,9 +162,10 @@ useful.Sort = function () {
 		};
 	};
 
+	this.init(config);
 };
 
 // return as a require.js module
 if (typeof module !== 'undefined') {
-	exports = module.exports = useful.Sort;
+	exports = module.exports = Sort;
 }
