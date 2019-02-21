@@ -166,6 +166,5 @@ var Sort = function (config) {
 };
 
 // return as a require.js module
-if (typeof module !== 'undefined') {
-	exports = module.exports = Sort;
-}
+if (typeof define != 'undefined') define(['sort'], function () { return Sort });
+if (typeof module != 'undefined') module.exports = Sort;
