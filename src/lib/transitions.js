@@ -191,6 +191,5 @@ var transitions = {
 };
 
 // return as a require.js module
-if (typeof module !== 'undefined') {
-	exports = module.exports = transitions;
-}
+if (typeof define != 'undefined') define([], function () { return transitions });
+if (typeof module != 'undefined') module.exports = transitions;

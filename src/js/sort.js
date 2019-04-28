@@ -35,7 +35,7 @@ var Sort = function (config) {
 		return this;
 	};
 
-	this.update = function (context) {
+	this.update = function () {
 		var a, b, selection, index, type, tbody, fragment, rows = [];
 		// update the headers
 		for (a = 0 , b = this.config.links.length; a < b; a += 1) {
@@ -99,7 +99,7 @@ var Sort = function (config) {
 	};
 
 	this.sortType = function (a, b, type) {
-		var cola, colb, vala, valb;
+		var cola, colb, vala, valb, result;
 		// get the two columns
 		cola = transitions.select(this.config.cols, a)[this.config.active];
 		colb = transitions.select(this.config.cols, b)[this.config.active];
@@ -134,7 +134,8 @@ var Sort = function (config) {
 			valb = colb.innerHTML.replace(/(<([^>]+)>)/ig, '').toLowerCase();
 		}
 		// compare the contents
-		return (this.config.direction > 0) ? vala > valb : vala < valb;
+		result = (vala > valb) ? 1 : -1;
+		return (this.config.direction > 0) ? -result : result;
 	};
 
 	this.perform = function (index, direction) {
@@ -166,5 +167,5 @@ var Sort = function (config) {
 };
 
 // return as a require.js module
-if (typeof define != 'undefined') define(['sort'], function () { return Sort });
+if (typeof define != 'undefined') define([], function () { return Sort });
 if (typeof module != 'undefined') module.exports = Sort;

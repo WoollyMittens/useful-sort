@@ -9,13 +9,32 @@ Try the <a href="http://www.woollymittens.nl/default.php?url=useful-sort">demo</
 The stylesheet is best included in the header of the document.
 
 ```html
-<link rel="stylesheet" href="./css/sort.css"/>
+<link rel="stylesheet" href="css/sort.css"/>
 ```
 
 This include can be added to the header or placed inline before the script is invoked.
 
 ```html
-<script src="./js/sort.js"></script>
+<script src="lib/transitions.js"></script>
+<script src="js/sort.js"></script>
+```
+
+Or use [Require.js](https://requirejs.org/).
+
+```js
+requirejs([
+	'lib/transitions.js',
+	'js/sort.js'
+], function(transitions, Sort) {
+	...
+});
+```
+
+Or import into an MVC framework.
+
+```js
+var transitions = require('lib/transitions.js');
+var Sort = require('js/sort.js');
 ```
 
 ## How to start the script
